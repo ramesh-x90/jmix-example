@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://employeeLeaveRequestListView.title"
+      focusComponent="employeeLeaveRequestsDataGrid">
+    <data>
+        <collection id="employeeLeaveRequestsDc"
+                    class="com.company.leavetracker.entity.EmployeeLeaveRequest">
+            <loader id="employeeLeaveRequestsDl" readOnly="true"/>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="employeeLeaveRequestsDataGrid.create"/>
+            <button id="editBtn" action="employeeLeaveRequestsDataGrid.edit"/>
+            <button id="removeBtn" action="employeeLeaveRequestsDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="employeeLeaveRequestsDl"/>
+        </hbox>
+        <dataGrid id="employeeLeaveRequestsDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="employeeLeaveRequestsDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="leaveType"/>
+                <column property="periodFrom"/>
+                <column property="periodTo"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>
